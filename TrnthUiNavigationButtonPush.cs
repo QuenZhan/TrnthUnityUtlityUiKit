@@ -13,7 +13,7 @@ public class TrnthUiNavigationButtonPush : TrnthUiNavigationButton {
 		if (target != null) {
             Gizmos.color = Color.blue;
             var pos=target.transform.position;
-            var widget=target.GetComponent<UIWidget>();
+            // var widget=target.GetComponent<UIWidget>();
             // if(widget)pos=widget.drawRegion;
             Gizmos.DrawLine(transform.position, pos);
         }

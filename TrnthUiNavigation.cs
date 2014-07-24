@@ -22,7 +22,7 @@ public class TrnthUiNavigation : TrnthPoolBase {
 		if(!e.GetComponent<TweenAlpha>())e.AddComponent<TweenAlpha>();
 	}
 	public void pop(){
-		if(list.Count<1)return;
+		if(list.Count<2)return;
 		var last=list[list.Count-1];
 		list.Remove(last);
 		var tweener=last.GetComponent<TweenPosition>();
@@ -62,6 +62,7 @@ public class TrnthUiNavigation : TrnthPoolBase {
 	void play(UITweener tweener,UITweener prefab){
 		tweener.animationCurve=prefab.animationCurve;
 		tweener.duration=prefab.duration;
+		tweener.delay=prefab.delay;
 		tweener.ResetToBeginning();
 		tweener.PlayForward();
 	}

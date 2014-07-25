@@ -4,6 +4,7 @@ using System.Collections;
 public class TrnthUiNavigationButtonPush : TrnthUiNavigationButton {
 	public GameObject target;
 	public void execute(){
+		if(!target)return;
 		nav.push(target);
 	}
 	void OnClick(){

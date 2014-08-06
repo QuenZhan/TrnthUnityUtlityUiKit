@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class TrnthUiNavigation : TrnthPoolBase {
@@ -8,26 +9,30 @@ public class TrnthUiNavigation : TrnthPoolBase {
 	public TweenPosition prefabTweenerLower;
 	public TweenAlpha prefabTweenerAlpha;
 	public List<GameObject> list;
-	public void push(GameObject prefab){
+	public void push(GameObject prefab,TrnthUiNavigationButtonPush pusher){
+		GameObject e=Spawn(prefab);
+		if(!e)return;
 		if(list.Count>0){
 			var last=list[list.Count-1];
 			copyAndPlay(last.GetComponent<TweenPosition>(),prefabTweenerLower,true);
 			copyAndPlay(last.GetComponent<TweenAlpha>(),prefabTweenerAlpha,true);
 		}
-		GameObject e=Spawn(prefab);
+		if(pusher&&pusher.onAfterSapwn!=null)pusher.onAfterSapwn(e);
 		list.Add(e);
 		var tweener=e.GetComponent<TweenPosition>();
 		if(!tweener)tweener=e.AddComponent<TweenPosition>();
 		copyAndPlay(tweener,prefabTweenerUpper,true);
 		if(!e.GetComponent<TweenAlpha>())e.AddComponent<TweenAlpha>();
+		copyAndPlay(e.GetComponent<TweenAlpha>(),prefabTweenerAlpha,false);
 	}
 	public void pop(){
 		if(list.Count<2)return;
 		var last=list[list.Count-1];
-		list.Remove(last);
+		list.RemoveAt(list.Count-1);
 		var tweener=last.GetComponent<TweenPosition>();
-		copyAndPlay(tweener,prefabTweenerUpper,false);
-		
+		copyAndPlay(tweener,prefabTweenerUpper,false);		
+		// copyAndPlay(last.GetComponent<TweenAlpha>(),prefabTweenerAlpha,false);
+
 		Despawn(last.transform,tweener.duration);
 		if(list.Count<1)return;
 		last=list[list.Count-1];
@@ -67,6 +72,6 @@ public class TrnthUiNavigation : TrnthPoolBase {
 		tweener.PlayForward();
 	}
 	void Start(){
-		push(firstView);
+		push(firstView,null);
 	}
 }

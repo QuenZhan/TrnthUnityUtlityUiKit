@@ -17,6 +17,7 @@ public class TrnthUiNavigation : TrnthPoolBase {
 			copyAndPlay(last.GetComponent<TweenPosition>(),prefabTweenerLower,true);
 			copyAndPlay(last.GetComponent<TweenAlpha>(),prefabTweenerAlpha,true);
 		}
+		e.BroadcastMessage("onNavigationAppear",SendMessageOptions.DontRequireReceiver);
 		if(pusher&&pusher.onAfterSapwn!=null)pusher.onAfterSapwn(e);
 		list.Add(e);
 		var tweener=e.GetComponent<TweenPosition>();
@@ -36,6 +37,7 @@ public class TrnthUiNavigation : TrnthPoolBase {
 		Despawn(last.transform,tweener.duration);
 		if(list.Count<1)return;
 		last=list[list.Count-1];
+		last.BroadcastMessage("onNavigationAppear",SendMessageOptions.DontRequireReceiver);
 		copyAndPlay(last.GetComponent<TweenPosition>(),prefabTweenerLower,false);
 		copyAndPlay(last.GetComponent<TweenAlpha>(),prefabTweenerAlpha,false);
 

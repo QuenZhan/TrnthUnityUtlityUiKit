@@ -6,6 +6,7 @@ public class TrnthUiNavigationButtonPush : TrnthUiNavigationButton {
 	public GameObject target;
 	public Action<GameObject> onAfterSapwn;
 	public bool onClick=true;
+	[ContextMenu ("execute")]
 	public void execute(){
 		if(!target)return;
 		nav.push(target,this);

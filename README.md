@@ -1,8 +1,9 @@
-TrnthUnityUtlityUiNavigation
+TrnthUnityUtlityUiKit
 ============================
 
-## Requied Plugins 
+## Requied Plugins
 
 1. Ngui
 1. Pool manager
-1. TrnthUnityUtlityPoolManager
+1. TrnthUnityUtilityPoolManager
+1. TrnthUnityUtility
